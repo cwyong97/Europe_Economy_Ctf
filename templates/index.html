@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>CTF 題目</title></head>
+<body>
+  <h1>題目列表</h1>
+  {% if ended %}
+    <p><strong>活動已結束，無法作答。</strong></p>
+  {% else %}
+    <ul>
+      {% for q in questions %}
+        <li>
+          <a href="{{ url_for('question', qid=q.id) }}">{{ q.id }} - {{ q.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {% if name %}
+    <p>你好，{{ name }}！</p>
+  {% else %}
+    <p>請先 <a href="{{ url_for('login') }}">登入</a></p>
+  {% endif %}
+  <a href="/scoreboard">查看記分板</a> |
+  <!--<a href="/logout">登出</a>-->
+</body>
+</html>
