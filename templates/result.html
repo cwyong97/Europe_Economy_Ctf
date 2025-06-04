@@ -1,0 +1,19 @@
+<!-- templates/result.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>結果</title>
+</head>
+<body>
+    {% if correct %}
+        <h1>✅ 恭喜你答對了！</h1>
+    {% else %}
+        <h1>❌ 很可惜，答錯了。</h1>
+    {% endif %}
+
+    <p>題目：{{ question.title }}</p>
+
+    <a href="{{ url_for('index') }}">回首頁</a>
+</body>
+</html>
