@@ -1,0 +1,23 @@
+<!-- templates/question.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ question.title }}</title>
+</head>
+<body>
+    <h1>{{ question.title }}</h1>
+    <p>{{ question.description }}</p>
+
+    {% if not ended %}
+    <form method="POST">
+        <input type="text" name="flag" placeholder="輸入 flag">
+        <button type="submit">提交</button>
+    </form>
+    {% else %}
+    <p>活動已結束，無法作答。</p>
+    {% endif %}
+
+    <a href="{{ url_for('scoreboard_page') }}">查看分數板</a>
+</body>
+</html>
