@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>記分板</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      padding: 2em;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    table {
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+      border-collapse: collapse;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background-color: white;
+    }
+    th, td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+    .gold { background-color: #ffd700; }  /* 金色 */
+    .silver { background-color: #c0c0c0; } /* 銀色 */
+    .bronze { background-color: #cd7f32; } /* 銅色 */
+    .solvers {
+      font-size: 0.9em;
+      color: #666;
+    }
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 2em;
+      color: #4CAF50;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>記分板</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>名次</th>
+        <th>名字</th>
+        <th>分數</th>
+        <th>答對題號</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for name, data in scores %}
+      <tr class="{% if loop.index == 1 %}gold{% elif loop.index == 2 %}silver{% elif loop.index == 3 %}bronze{% endif %}">
+        <td>{{ loop.index }}</td>
+        <td>{{ name }}</td>
+        <td>{{ data['score'] }}</td>
+        <td>{{ ', '.join(data['correct']) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2 style="text-align: center; margin-top: 2em;">各題答對人數</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>題號</th>
+        <th>題目</th>
+        <th>解出人數</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for q in questions %}
+      <tr>
+        <td>{{ q.id }}</td>
+        <td>{{ q.title }}</td>
+        <td>{{ solvers[q.id]|length }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <a href="{{ url_for('index') }}">返回首頁</a>
+</body>
+</html>
