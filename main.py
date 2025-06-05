@@ -4,6 +4,7 @@ import os
 from datetime import datetime, timezone,timedelta
 import csv
 from io import StringIO
+import time
 
 
 app = Flask(__name__)
@@ -59,7 +60,9 @@ def question(qid):
                 scoreboard[name]['score'] += dynamic_points
                 scoreboard[name]['correct'].append(qid)
                 solvers[qid].append(name)
-
+        else:
+            time.sleep(3)  # 錯誤延遲三秒
+        
         # 顯示答題結果頁（不跳轉記分板）
         return render_template('result.html', correct=correct, question=question)
 
