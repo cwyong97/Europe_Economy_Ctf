@@ -12,7 +12,7 @@ app.secret_key = 'supersecretkey'  # 可換成環境變數
 
 # 啟動時間 = 現在時間，結束時間 = 啟動後 9 分鐘
 start_time = datetime.now(timezone.utc)
-END_TIME = start_time + timedelta(minutes=9)
+END_TIME = start_time + timedelta(minutes=6)
 
 # 載入題目資料
 with open('questions.json', 'r', encoding='utf-8') as f:
